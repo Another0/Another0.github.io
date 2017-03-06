@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css" media="screen">
+    #dom{
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -60px;
+      margin-top: -60px;
+    }
+
+    #dom1{
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -60px;
+      margin-top: -60px;
+      border: 3px solid red;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: d 1s linear infinite;
+    }
+
+    #dom2{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      border: 40px solid red;
+      border-radius: 50%;
+      border-top-color: pink;
+      border-right-color: pink;
+      z-index: 0;
+    }
+
+    #dom3{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      border: 40px solid transparent;
+      border-radius: 50%;
+      border-top-color: red;
+      border-right-color: red;
+      z-index: 2;
+      animation: d3 2s linear infinite;
+    }
+
+    #dom4{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -40px;
+      margin-top: -40px;
+      border: 40px solid pink;
+      border-radius: 50%;
+      border-top-color: transparent;
+      border-right-color: transparent;
+      z-index: 2;
+      animation: d4 2s linear infinite;
+    }
+
+    @keyframes d{
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+
+    @keyframes d3{
+      0% {transform: rotate(0deg);z-index: 2;}
+      25% {transform: rotate(0deg);z-index: 2;}
+      50% {transform: rotate(180deg);z-index: 2;}
+      50.01% {transform: rotate(180deg);z-index: 1;}
+      75% {transform: rotate(180deg);z-index: 1;}
+      75.01% {transform: rotate(180deg);z-index: 1;}
+      99.99% {transform: rotate(360deg);z-index: 1;}
+      100%{transform: rotate(360deg);z-index: 2;}
+    }
+
+    @keyframes d4{
+      0% {transform: rotate(0deg);z-index: 1;}
+      25% {transform: rotate(180deg);z-index: 1;}
+      50% {transform: rotate(180deg);z-index: 1;}
+      50.01% {transform: rotate(180deg);z-index: 2;}
+      75% {transform: rotate(360deg);z-index: 2;}
+      75.01% {transform: rotate(360deg);z-index: 2;}
+      100% {transform: rotate(360deg);z-index: 2;}
+    }
+  </style>
+</head>
+<body>
+  <div id="dom">
+    <div id="dom1"></div>
+    <div id="dom2"></div>
+    <div id="dom3"></div>
+    <div id="dom4"></div>
+  </div>
+</body>
+</html>
