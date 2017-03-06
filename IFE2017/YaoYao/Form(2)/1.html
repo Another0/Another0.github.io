@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css" media="screen">
+    form{
+      width: 600px;
+    }
+    label{
+      width: 500px;
+      height: 50px;
+      display: block;
+      margin-top: 50px;
+      line-height: 50px;
+      text-align: right;
+    }
+    span{
+      font-weight: 600;
+    }
+    input[type="button"]{
+      width: 60px;
+      height: 35px;
+      background-color: blue;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600px;
+      font-family: "微软雅黑";
+      border-radius: 3px;
+      outline: none;
+      margin-left: 400px;
+      margin-top: 40px;
+    }
+    input{
+      width: 300px;
+      height: 30px;
+      border-radius: 5px;
+      outline: none;
+      padding-left: 5px;
+      margin-left: 20px;
+    }
+
+    i{
+      font-size: 14px;
+      font-family: "微软雅黑";
+      font-weight: 600;
+      margin-left: 55px;
+    }
+
+    .red{
+      color: red;
+    }
+    .green{
+      color: green;
+    }
+    .nul{
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label>
+      <span>名称</span>
+      <input type="text" name="" value="">
+      <br>
+      <i></i>
+    </label>
+    <label>
+      <span>密码</span>
+      <input type="password" name="" value="">
+      <br>
+      <i></i>
+    </label>
+    <label>
+      <span>密码确认</span>
+      <input type="password" name="" value="">
+      <br>
+      <i></i>
+    </label>
+    <label>
+      <span>邮箱</span>
+      <input type="text" name="" value="">
+      <br>
+      <i></i>
+    </label>
+    <label>
+      <span>手机</span>
+      <input type="text" name="" value="">
+      <br>
+      <i></i>
+    </label>
+    <input type="button" name="" value="验证">
+  </form>
+
+  <script type="text/javascript">
+    let oInput = document.querySelectorAll("input");
+    let oInputB = document.querySelectorAll("input[type=button]")[0];
+    let oi = document.getElementsByTagName("i");
+    let a = true;
+
+    for(let i = 0; i < oInput.length-1; i++) {
+      oInput[i].index = i;
+      oInput[i].s = false;
+      (function(i) {
+        oInput[i].onblur = function() {
+
+          let a = oInput[this.index].value;
+
+          if(a == "") {
+            oi[this.index].innerHTML = "必填，4-16个字符";
+            oi[this.index].className = "nul";
+            this.s = false;
+          }else if(a.length > 20 || a.length < 4) {
+            oi[this.index].innerHTML = "不能超出4-20个字符";
+            oi[this.index].className = "red";
+            this.s = false;
+          }else{
+            fun(this.index);
+          }
+        }
+      })(i);
+    }
+
+    function fun(index) {
+      switch(index){
+        case 0: f0(index);break;
+        case 1: f1(index);break;
+        case 2: f2(index);break;
+        case 3: f3(index);break;
+        case 4: f4(index);break;
+      }
+    }
+
+    function f0(index) {
+      oi[index].innerHTML = "格式正确";
+      oi[index].className = "green";
+      oInput[index].s = true;
+    }
+
+    function f1(index) {
+      for(let i = 0; i < oInput[index].value.length; i++) {
+        if(isNaN(oInput[index].value)) {
+          oi[index].innerHTML = "只能输入数字";
+          oi[index].className = "red";
+          oInput[index].s = false;
+        }else{
+          oi[index].innerHTML = "格式正确";
+          oi[index].className = "green";
+          oInput[index].s = true;
+        }
+      }
+    }
+
+    function f2(index) {
+      if(oInput[index].value != oInput[index-1].value) {
+        oi[index].innerHTML = "两次密码不一致，请重新输入";
+        oi[index].className = "red";
+        oInput[index].s = false;
+      }else{
+        oi[index].innerHTML = "密码一致";
+        oi[index].className = "green";
+        oInput[index].s = true;
+      }
+    }
+
+    function f3(index) {
+      let a = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if(!a.test(oInput[index].value)) {
+        oi[index].innerHTML = "邮箱格式不正确";
+        oi[index].className = "red";
+        oInput[index].s = false;
+      }else{
+        oi[index].innerHTML = "格式正确";
+        oi[index].className = "green";
+        oInput[index].s = true;
+      }
+    }
+
+    function f4(index) {
+      let a = /^\d+$/;
+      if(oInput[index].value.length != 11 || !a.test(oInput[index].value)) {
+        oi[index].innerHTML = "手机格式不正确";
+        oi[index].className = "red";
+        oInput[index].s = false;
+      }else{
+        oi[index].innerHTML = "格式正确";
+        oi[index].className = "green";
+        oInput[index].s = true;
+      }
+    }
+
+    oInputB.onclick = function() {
+        for(let i = 0; i < oInput.length-1; i++) {
+          if(!oInput[i].s){
+            a = false;
+          }
+        }
+      if(a){
+        alert("格式正确");
+      }else{
+        alert("格式不正确");
+      }
+    }
+  </script>
+</body>
+</html>

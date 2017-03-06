@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css" media="screen">
+    label{
+      width: 500px;
+      height: 50px;
+      display: block;
+      margin-top: 50px;
+      line-height: 50px;
+    }
+    span{
+      font-weight: 600;
+    }
+    input{
+      margin-left: 20px;
+    }
+    input[type="button"]{
+      width: 60px;
+      height: 35px;
+      background-color: blue;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600px;
+      font-family: "微软雅黑";
+      border-radius: 3px;
+      outline: none;
+    }
+    input[type="text"]{
+      width: 300px;
+      height: 30px;
+      border-radius: 5px;
+      outline: none;
+      padding-left: 5px;
+    }
+
+    i{
+      font-size: 14px;
+      font-family: "微软雅黑";
+      font-weight: 600;
+      margin-left: 55px;
+    }
+
+    .red{
+      color: red;
+    }
+    .green{
+      color: green;
+    }
+    .nul{
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <label>
+    <span>名称</span>
+    <input type="text" name="" value="">
+    <input type="button" name="" value="验证">
+    <br>
+    <i></i>
+  </label>
+  <label>
+    <span>名称</span>
+    <input type="text" name="" value="">
+    <input type="button" name="" value="验证">
+    <br>
+    <i></i>
+  </label>
+  <label>
+    <span>名称</span>
+    <input type="text" name="" value="">
+    <input type="button" name="" value="验证">
+    <br>
+    <i></i>
+  </label>
+  <script type="text/javascript">
+    let oInputT = document.querySelectorAll("input[type=text]");
+    let oInputB = document.querySelectorAll("input[type=button]");
+    let oi = document.getElementsByTagName("i");
+
+    for(let i = 0; i < oInputB.length; i++) {
+      oInputB[i].index = i;
+      (function(i) {
+        oInputB[i].onclick = function() {
+
+          let a = oInputT[this.index].value;
+
+          if(a == "") {
+            oi[this.index].innerHTML = "必填，4-16个字符";
+            oi[this.index].className = "nul";
+          }else if(a.length > 16 || a.length < 4) {
+            oi[this.index].innerHTML = "输入格式不正确";
+            oi[this.index].className = "red";
+          }else if(a.length <= 16 && a.length >= 4) {
+            oi[this.index].innerHTML = "输入正确";
+            oi[this.index].className = "green";
+          }
+        }
+      })(i);
+    }
+  </script>
+</body>
+</html>
