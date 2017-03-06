@@ -242,12 +242,15 @@
     }
 
     oInputB.onclick = function() {
-      alert(1);
         for(let i = 0; i < oInput.length-1; i++) {
           if(!oInput[i].s){
             a = false;
+            break;
+          }else{
+            a = true;
           }
         }
+        // alert(s);
       if(a){
         alert("格式正确");
       }else{
