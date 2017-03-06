@@ -62,44 +62,42 @@
     <br>
     <i></i>
   </label>
-  <label>
-    <span>名称</span>
-    <input type="text" name="" value="">
-    <input type="button" name="" value="验证">
-    <br>
-    <i></i>
-  </label>
-  <label>
-    <span>名称</span>
-    <input type="text" name="" value="">
-    <input type="button" name="" value="验证">
-    <br>
-    <i></i>
-  </label>
   <script type="text/javascript">
-    let oInputT = document.querySelectorAll("input[type=text]");
-    let oInputB = document.querySelectorAll("input[type=button]");
-    let oi = document.getElementsByTagName("i");
+    let oInputT = document.querySelectorAll("input[type=text]")[0];
+    let oInputB = document.querySelectorAll("input[type=button]")[0];
+    let oi = document.getElementsByTagName("i")[0];
 
-    for(let i = 0; i < oInputB.length; i++) {
-      oInputB[i].index = i;
-      (function(i) {
-        oInputB[i].onclick = function() {
+    oInputB.onclick = function() {
+      medth.f1(oInputT.value);
+    }
 
-          let a = oInputT[this.index].value;
 
-          if(a == "") {
-            oi[this.index].innerHTML = "必填，4-16个字符";
-            oi[this.index].className = "nul";
-          }else if(a.length > 16 || a.length < 4) {
-            oi[this.index].innerHTML = "输入格式不正确";
-            oi[this.index].className = "red";
-          }else if(a.length <= 16 && a.length >= 4) {
-            oi[this.index].innerHTML = "输入正确";
-            oi[this.index].className = "green";
+    let medth = {
+      f1: function(str) {
+        if(str == "") {
+          oi.innerHTML = "输入不能为空";
+          oi.className = "red";
+          return;
+        }
+
+        let s = 0;
+        for(let i = 0; i < str.length; i++) {
+          if(str.charCodeAt(i) >= 0x00 && str.charCodeAt(i) <= 0xFF) {
+            s+=1;
+          }else{
+            s+=2;
           }
         }
-      })(i);
+
+        if(s > 16 || s < 4) {
+          oi.innerHTML = "请输入4-16个字符";
+          oi.className = "nul";
+        }else{
+          oi.innerHTML = "输入格式正确";
+          oi.className = "green";
+        }
+
+      }
     }
   </script>
 </body>
