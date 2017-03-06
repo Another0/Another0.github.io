@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body{
+      font-size: 16px;
+      font-family: "微软雅黑";
+      font-weight: 600;
+    }
+    #dom1 input{
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+
+    #dom2{
+      margin-top: 30px;
+    }
+
+    #dom3{
+      display: none;
+    }
+    #dom3 input{
+      margin-top: 30px;
+      margin-left: 20px;
+      padding-left: 5px;
+      width: 300px;
+      height: 30px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div id="dom1">
+    <label>
+      <input type="radio" name="student" value="" checked="true">在校生
+    </label>
+    <label>
+      <input type="radio" name="student" value="">非在校生
+    </label>
+  </div>
+  <div id="dom2">
+    <select name="" id="s1">
+      <option>请选择</option>
+      <option value="0">西安</option>
+      <option value="1">北京</option>
+      <option value="2">上海</option>
+    </select>
+    <select name="" id="s2"></select>
+  </div>
+  <div id="dom3">
+    <label>就业单位<input type="text"></label>
+  </div>
+  <script type="text/javascript">
+    let s1 = document.querySelector("#s1");
+    let r = document.querySelectorAll("input[type=radio]");
+    let dom2 = document.querySelector("#dom2");
+    let dom3 = document.querySelector("#dom3"); 
+    let arr = [["西邮","西电","西法","西外"],["北邮","清华","北大"],["复旦","上海交通","不知道大学"]];
+    s1.onchange = function() {
+      let s2 = document.querySelector("#s2");
+       while(s2.childNodes.length != 0) {
+          s2.removeChild(s2.firstChild);
+       }
+      mod.fn(this.value);
+    }
+
+    let mod = {
+      fn: function(val) {
+          this.fs(val);
+      },
+      fs: function(v) {
+        for(let i = 0; i < arr[v].length; i++) {
+            let node = document.createElement("option");
+            node.innerHTML = arr[v][i];
+            s2.appendChild(node);
+          }
+      }
+    };
+
+    r[0].onclick = function() {
+      dom2.style.display = "block";
+      dom3.style.display = "none";
+    }
+
+    r[1].onclick = function() {
+      dom2.style.display = "none";
+      dom3.style.display = "block";
+    }
+
+  </script>
+</body>
+</html>
