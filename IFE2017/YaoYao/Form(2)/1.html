@@ -47,6 +47,13 @@
       margin-left: 55px;
     }
 
+    .fred{
+      border-color: red;
+    }
+    .fgreen{
+      border-color: green;
+    }
+
     .red{
       color: red;
     }
@@ -95,7 +102,7 @@
 
   <script type="text/javascript">
     let oInput = document.querySelectorAll("input");
-    let oInputB = document.querySelectorAll("input[type=button]")[0];
+    let oInputB = document.querySelector("input[type=button]");
     let oi = document.getElementsByTagName("i");
     let a = true;
 
@@ -115,11 +122,46 @@
             oi[this.index].innerHTML = "不能超出4-20个字符";
             oi[this.index].className = "red";
             this.s = false;
+            this.className = 'fred';
           }else{
             fun(this.index);
           }
         }
+        oInput[i].onfocus = function() {
+          this.className = "";
+          switch(this.index) {
+            case 0: fmethod.f0(this.index);break;
+            case 1: fmethod.f1(this.index);break;
+            case 2: fmethod.f2(this.index);break;
+            case 3: fmethod.f3(this.index);break;
+            case 4: fmethod.f4(this.index);break;
+          }
+        }
       })(i);
+    }
+
+    let fmethod = {
+      f0: function(index) {
+        oi[index].innerHTML = "格式为4-20位字符";
+        oi[index].className = "nul";
+      },
+      f1: function(index) {
+        oi[index].innerHTML = "格式为数字";
+        oi[index].className = "nul";
+      },
+      f2: function(index) {
+        oi[index].innerHTML = "需和上面保持一致";
+        oi[index].className = "nul";
+      },
+      f3: function(index) {
+        oi[index].innerHTML = "要正确的邮箱格式";
+        oi[index].className = "nul";
+      },
+      f4: function(index) {
+        oi[index].innerHTML = "11位的手机号";
+        oi[index].className = "nul";
+      }
+
     }
 
     function fun(index) {
@@ -136,6 +178,7 @@
       oi[index].innerHTML = "格式正确";
       oi[index].className = "green";
       oInput[index].s = true;
+      oInput[index].className = "fgreen";
     }
 
     function f1(index) {
@@ -144,10 +187,12 @@
           oi[index].innerHTML = "只能输入数字";
           oi[index].className = "red";
           oInput[index].s = false;
+          oInput[index].className = "fred";
         }else{
           oi[index].innerHTML = "格式正确";
           oi[index].className = "green";
           oInput[index].s = true;
+          oInput[index].className = "fgreen";
         }
       }
     }
@@ -157,10 +202,12 @@
         oi[index].innerHTML = "两次密码不一致，请重新输入";
         oi[index].className = "red";
         oInput[index].s = false;
+        oInput[index].className = "fred";
       }else{
         oi[index].innerHTML = "密码一致";
         oi[index].className = "green";
         oInput[index].s = true;
+        oInput[index].className = "fgreen";
       }
     }
 
@@ -170,10 +217,12 @@
         oi[index].innerHTML = "邮箱格式不正确";
         oi[index].className = "red";
         oInput[index].s = false;
+        oInput[index].className = "fred";
       }else{
         oi[index].innerHTML = "格式正确";
         oi[index].className = "green";
         oInput[index].s = true;
+        oInput[index].className = "fgreen";
       }
     }
 
@@ -183,14 +232,17 @@
         oi[index].innerHTML = "手机格式不正确";
         oi[index].className = "red";
         oInput[index].s = false;
+        oInput[index].className = "fred";
       }else{
         oi[index].innerHTML = "格式正确";
         oi[index].className = "green";
         oInput[index].s = true;
+        oInput[index].className = "fgreen";
       }
     }
 
     oInputB.onclick = function() {
+      alert(1);
         for(let i = 0; i < oInput.length-1; i++) {
           if(!oInput[i].s){
             a = false;
