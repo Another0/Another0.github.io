@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    table{
+      border-collapse: collapse;
+      position: relative;
+      top: 50px;
+      left: 50px;
+    }
+    input[type="text"]{
+      width: 300px;
+      height: 30px;
+      border-radius: 3px;
+      margin-left: 50px;
+    }
+    .clear{
+      text-align: center;
+      font-family: "微软雅黑";
+      font-size: 16px;
+    }
+    td{
+      width: 50px;
+      height: 50px;
+      border-collapse: collapse;
+    }
+    #dom{
+      width: 52px;
+      height: 52px;
+      background-color: red;
+      position: absolute;
+      top: 148px;
+      left: 112px;
+      z-index: 3px;
+      transition: transform 1s,top 0.5s,left 0.5s;
+    }
+    #dom1{
+      width: 52px;
+      height: 10px;
+      background-color: blue;
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function() {
+      let dom = document.getElementById("dom");
+      let btn = document.querySelector("input[type=button]");
+      let val = document.querySelector("input[type=text]");
+      let s = 0,l = 1;
+
+      btn.onclick = function() {
+        let v = val.value;
+        let left = dom.offsetLeft;
+        let top = dom.offsetTop; 
+        switch(v) {
+         case "left": rotate.f0();break;
+         case "right": rotate.f1();break;
+         case "forward": rotate.f2();break;
+         case "backward": rotate.f3();break;
+         case "l": move.f0(left);break;
+         case "r": move.f1(left);break;
+         case "t": move.f2(top);break;
+         case "b": move.f3(top);break;
+         case "L": run.f0(left);break;
+         case "R": run.f1(left);break;
+         case "T": run.f2(top);break;
+         case "B": run.f3(top);break;
+        }
+      }
+      let run = {
+         f0: function(left)  {
+          l = 4;
+          dom.style.transform = "rotate("+-90+"deg)";
+          move.f0(left);
+        },
+        f1: function(left)  {
+          l = 2;
+          dom.style.transform = "rotate("+90+"deg)";
+          move.f1(left);
+        },
+        f2: function(top)  {
+          l = 1;
+          dom.style.transform = "rotate("+0+"deg)";
+          move.f2(top);
+        },
+        f3: function(top)  {
+          l = 3;
+          dom.style.transform = "rotate("+180+"deg)";
+          move.f3(top);
+        }  
+      }
+
+      let move = {
+        f0: function(left) {
+          if(left-53 < 112) {
+            return;
+          }else{
+            dom.style.left = left-53+"px";
+          }
+        },
+        f1: function(left) {
+          if(left+53 > 483) {
+            return;
+          }else{
+            dom.style.left = left+53+"px";
+          }
+        },
+        f2: function(top) {
+          if(top-53 < 148) {
+            return;
+          }else{
+            dom.style.top = top-53+"px";
+          }
+        },
+        f3: function(top) {
+          if(top+53 > 519) {
+            return;
+          }else{
+            dom.style.top = top+53+"px";
+          }
+        }
+      }
+
+      let rotate = {
+        f0: function() {
+          if(l == 1) {
+             l = 4;
+          }else{
+            l-=1;
+          }
+          s-=90;
+          dom.style.transform = "rotate("+s+"deg)";
+        },
+        f1: function() {
+          if(l == 4) {
+            l = 1;
+          }else{
+            l+=1;
+          }
+          s+=90;
+          dom.style.transform = "rotate("+s+"deg)";
+        },
+        f2: function() {
+          let left = dom.offsetLeft;
+          let top = dom.offsetTop;
+          switch(l) {
+            case 1: 
+              if(top-53 < 148) {
+                break;
+              }else{
+                dom.style.top = top-53+"px";
+              }
+            ;break;
+            case 2: 
+              if(left+53 > 483) {
+                break;
+              }else{
+                dom.style.left = left+53+"px";
+              }
+            ;break;
+            case 3:
+              if(top+53 > 519) {
+                break;
+              }else{
+                dom.style.top = top+53+"px";
+              }
+            ;break;
+            case 4:
+              if(left-53 < 112) {
+                break;
+              }else{
+                dom.style.left = left-53+"px";
+              }
+            ;break;
+          }
+        },
+        f3: function() {
+          if(l+2 > 4) {
+            l-=2;
+          }else{
+            l+=2;
+          }
+          s+=180;
+          dom.style.transform = "rotate("+s+"deg)";
+        }
+      }
+
+    }
+  </script>
+</head>
+<body>
+
+  <input type="text" name="" value="" placeholder="输入left,right,forward,backward,l,f,b,t,L,F,B,T">
+  <input type="button" name="" value="GO">
+  <div id="dom">
+    <div id="dom1"></div>
+  </div>
+  <table border="1">
+    <tr>
+      <td class="clear">1</td>
+      <td class="clear">2</td>
+      <td class="clear">3</td>
+      <td class="clear">4</td>
+      <td class="clear">5</td>
+      <td class="clear">6</td>
+      <td class="clear">7</td>
+      <td class="clear">8</td>
+      <td class="clear">9</td>
+    </tr>
+    <tr>
+      <td class="clear">2</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">3</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">4</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">5</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">6</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">7</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">8</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="clear">9</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</body>
+</html>
