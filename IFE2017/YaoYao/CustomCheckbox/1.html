@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    input{
+      display: none;
+    }
+    .r label{
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+    }
+
+    .r input:checked+label,.c input:checked+label{
+      position: relative;
+      border: 1px solid red;
+    }
+
+    .r input:checked+label::after{
+      content: "";
+      width: 6px;
+      height: 6px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -3px;
+      margin-top: -3px;
+      border-radius: 50%;
+      background-color: red;
+    }
+
+    .c label{
+      display: block;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      line-height: 16px;
+      text-align: center;
+    }
+
+    .c input:checked+label::after{
+      content: "\2714";
+      color: red;
+    }
+
+/*//////////////////////////////////////////////////////////*/
+    .xr label,.xc label{
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      background:url('bg.png') no-repeat;
+    }
+    .xr label{
+      background-position:-24px -10px;
+    }
+    .xc label{
+      margin-top: 10px;
+      background-position: -25px -32px;
+    }
+    .xr input:checked+label{
+      background-position: -59px -10px;
+    }
+    .xc input:checked+label{
+      background-position: -60px -32px;
+    }
+  </style>
+</head>
+<body>
+  <p>伪元素：</p>
+  <div class="r">
+    <input type="radio" name="1" id="one">
+    <label for="one"></label>
+    <input type="radio" name="1" id="two">
+    <label for="two"></label>
+  </div>
+  <div class="c">
+    <input type="checkbox" id="three">
+    <label for="three"></label>
+  </div>
+
+  <p>雪碧图：</p>
+  <div class="xr">
+    <input type="radio" name="1" id="xone">
+    <label for="xone"></label>
+    <input type="radio" name="1" id="xtwo">
+    <label for="xtwo"></label>
+  </div>
+  <div class="xc">
+    <input type="checkbox" id="xthree">
+    <label for="xthree"></label>
+  </div>
+</body>
+</html>
