@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button type="button" class="button">reset</button>
+    </div>
+    <div id="rubberbandDiv"></div>
+    <canvas id="canvas" width="1000" height="500"></canvas>
+    <script type="text/javascript">
+        function init() {
+            let canvas = document.querySelector('#canvas')
+            let ctx = canvas.getContext('2d')
+            let img = new Image()
+            img.src = "image.jpg"
+            alert(1)
+
+            img.onload = function () {
+                ctx.drawImage(img, 20, 20, 800, 500)
+                // console.log(canvas.toDataURL())
+                alert(0)
+            }
+        }
+        init()
+    </script>
+</body>
+</html>

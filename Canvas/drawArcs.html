@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="500"></canvas>
+    <script type="text/javascript">
+        let canvas = document.querySelector('#canvas')
+        let ctx = canvas.getContext('2d')
+
+        function init () {
+            drawTwoArcs()
+        }
+
+        function drawTwoArcs () {
+            ctx.fillStyle = '#233'
+            ctx.strokeStyle = '#fff'
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)'
+            ctx.shadowOffsetX = 12
+            ctx.shadowOffsetY = 12
+            ctx.shadowBlur = 15
+            ctx.beginPath()
+            ctx.arc(300, 190, 150, 0, Math.PI * 2, true)
+            ctx.arc(300, 190, 100, 0, Math.PI * 2, false)
+            ctx.fill()
+            ctx.stroke()
+        }
+
+        init()
+    </script>
+</body>
+</html>

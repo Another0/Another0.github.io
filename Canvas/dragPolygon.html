@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <label>strokeStyle: <input type="text" id="strokeStyle"></label> -->
+    <label>fillStyle: <input type="text" id="fillStyle" value="red"></label>
+    <label>sides: <input type="text" id="sides" value="5"></label>
+    <label>radius: <input type="text" id="radius" value="50"></label>
+    <button id="button">dianji</button>
+    <canvas id="canvas" width="1000" height="500"></canvas>
+    <script type="text/javascript">
+        let canvas = document.querySelector('#canvas')
+        let ctx = canvas.getContext('2d')
+        let fillStyle = document.querySelector('#fillStyle')
+        let sides = document.querySelector('#sides')
+        let radius = document.querySelector('#radius')
+        let button = document.querySelector('#button')
+        let saveImageData = null
+
+        button.onclick = function () {
+            saveImageData = ctx.getImageData(0, 0, 1000, 500)
+        }
+
+        let polygon = function () {
+            this.x = x
+            this.y = y
+            this.sides = sides
+            this.radius = radius
+        }
+
+        polygon.prototype = {
+            create: function () {
+
+            }
+        }
+
+        canvas.onmousedown = function (event) {
+            let loc = windowToCanvas(event.clientX, event.clientY)
+            if (ctx.isPointInPath(loc.x, loc.y)) {
+                alert('在')
+            } else {
+                console.log(fillStyle.value, sides.value, radius.value)
+                createPolygon(ctx, fillStyle.value, sides.value, loc.x, loc.y, radius.value)
+            }
+        }
+
+        function createPolygon(ctx, fillStyle, sides, x, y, radius) {
+            sides = parseInt(sides)
+            radius = parseInt(radius)
+            ctx.save()
+            ctx.beginPath()
+            ctx.fillStyle = fillStyle
+            for (let i = 0; i < sides; i++) {
+                ctx.lineTo(x + radius*Math.sin((Math.PI*2/sides)*i), y - radius*Math.cos((Math.PI*2/sides)*i))
+            }
+            ctx.fill()
+            ctx.restore()
+        }
+
+        function windowToCanvas(x, y) {
+            let margin = canvas.getBoundingClientRect()
+            return {
+                x: x - margin.left,
+                y: y - margin.top
+            }
+        }
+    </script>
+</body>
+</html>

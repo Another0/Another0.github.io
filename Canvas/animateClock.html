@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas1"></canvas>
+    <script type="text/javascript" src="animateClockData.json"></script>
+    <script type="text/javascript">
+        let time = []
+        let ball = []
+        let color = ['#3f3', '#f3f', '#33f', '#ff3']
+        let height = document.documentElement.clientHeight
+        let data = animateClockData
+        function init () {
+            let width = document.documentElement.clientWidth
+            
+            let canvas = document.querySelector('#canvas')
+            let ctx = canvas.getContext('2d')
+            let canvas1 = document.querySelector('#canvas1')
+            let ctx1 = canvas1.getContext('2d')
+            canvas.width = width
+            canvas.height = height
+            canvas1.width = width
+            canvas1.height = height
+
+            setInterval(function () {
+                let arr = getTime()
+                // draw(ctx, arr)
+                // animate(ctx, arr[5], ctx1)
+            }, 1000)
+            setInterval(function () {
+                // render(ctx1)
+            }, 50)
+        }
+        function getTime() {
+            let date = new Date()
+            let hours = [Math.floor(date.getHours() / 10), date.getHours() % 10]
+            let minutes = [Math.floor(date.getMinutes() / 10), date.getMinutes() % 10]
+            let seconds = [Math.floor(date.getSeconds() / 10), date.getSeconds() % 10]
+            return arr = hours.concat(minutes, seconds)
+        }
+
+        function draw(ctx, arr) {
+            ctx.save()
+            ctx.clearRect(0, 0, 1300, 700)
+            ctx.translate(270, 100)
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < json[arr[i]].length; j++) {
+                    for (let k = 0; k < json[arr[i]][j].length; k++) {
+                        ctx.beginPath()
+                        if (json[arr[i]][j][k] === 0) {
+                            ctx.fillStyle = '#fff'
+                        } else {
+                            ctx.fillStyle = 'blue'
+                            if (i === 5) {
+                                let x = Math.pow(-1, Math.floor(Math.random() * 1000)) * 4
+                                let g = Math.random() + 1.5
+                                let c = Math.floor(Math.random() * 4)
+                                ball.push({x: k * 13, y: j * 13, r: 6, g: g, vx: x, vy: -10, c: color[c]})
+                            }
+                        }
+                        ctx.arc(k * 13, j * 13, 6, 0, Math.PI * 2, true)
+                        ctx.fill()
+                    }
+                }
+                ctx.translate(120, 0)
+                if (i === 1 || i === 3) {
+                    for (let m = 0; m < json.doi.length; m++) {
+                        for (let n = 0; n < json.doi[m].length; n++) {
+                            ctx.beginPath()
+                            if (json.doi[m][n] === 0) {
+                                ctx.fillStyle = '#fff'
+                            } else {
+                                ctx.fillStyle = 'blue'
+                            }
+                            ctx.arc(n * 13, m * 13, 6, 0, Math.PI * 2, true)
+                            ctx.fill()
+                        }
+                    }
+                    ctx.translate(50, 0)
+                } 
+            }
+            ctx.restore()
+        }
+        
+        function animate(ctx, arr) {
+            ctx.save()
+            ctx.clearRect(0, 0, 1300, 700)
+            ctx.translate(400, 100)
+            for (let j = 0; j < json[arr].length; j++) {
+                for (let k = 0; k < json[arr][j].length; k++) {
+                    ctx.beginPath()
+                    if (json[arr][j][k] === 0) {
+                        ctx.fillStyle = '#fff'
+                    } else {
+                        ctx.fillStyle = 'blue'
+                        let x = Math.pow(-1, Math.floor(Math.random() * 1000)) * 4
+                        let g = Math.random() + 1.5
+                        let c = Math.floor(Math.random() * 4)
+                        ball.push({x: k * 13, y: j * 13, r: 6, g: g, vx: x, vy: -10, c: color[c]})
+                    }
+                    ctx.arc(k * 13, j * 13, 6, 0, Math.PI * 2, true)
+                    ctx.fill()
+                }
+            }
+            ctx.restore()
+        }
+        function render(ctx1) {
+            // console.log(ball.length)
+            for (let i = 0; i < ball.length; i++) {
+                if (ball[i].x > 1366 || ball[i].x + 400 < 0) {
+                    ball.splice(i, 1)
+                    continue
+                }
+                ball[i].x += ball[i].vx
+                ball[i].y += ball[i].vy
+                ball[i].vy += ball[i].g
+                if (ball[i].y > height - 130 - 6) {
+                    ball[i].y = height - 130 - 6
+                    ball[i].vy = -Math.abs(ball[i].vy) * 0.6
+                    if (Math.abs(ball[i].vy) < 8) {
+                        ball[i].vy = ball[i].g = 0
+                    }
+                }
+            }
+            ctx1.save()
+            ctx1.clearRect(0, 0, 1300, 700)
+            ctx1.translate(970, 100)
+            for (let i = 0; i < ball.length; i++) {
+                ctx1.beginPath()
+                ctx1.fillStyle = ball[i].c
+                ctx1.arc(ball[i].x, ball[i].y, 6, 0, Math.PI * 2, true)
+                ctx1.fill()
+            }
+            ctx1.restore()
+        }
+
+        init()
+    </script>
+</body>
+</html>
