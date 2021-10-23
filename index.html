@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    span {
+      /* span是行内标签，不能定义宽高，也不会换行 */
+      /* ctrl + / 是添加注释，可以帮助更好理解代码中的逻辑 */
+      width: 100px;
+      height: 100px;
+      color: red;
+      background-color: green;
+    }
+
+    .content {
+      color: teal;
+      background: none;
+    }
+
+    span:nth-child(2) {
+      /* 可以使用属性选择器选择第二个标签，单独设置第二个标签的样式 */
+      /* color: yellow; */
+    }
+    
+    img {
+      /* img是行内块标签，可以定义宽高，但是不会换行 */
+      width: 300px;
+      height: 300px;
+    }
+    div {
+      /* div是快级标签，可以定义宽高，并且强制换行 */
+      width: 100px;
+      height: 100px;
+      background-color: hotpink;
+    }
+  </style>
+</head>
+<body>
+  <span class="title">标题</span>
+  <span class="content">bbbbb</span>
+  <a href="#">百度连接</a>
+  <img src="./3.jpg"/>
+  <div>ccccccc</div>
+</body>
+</html>
